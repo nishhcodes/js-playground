@@ -1,33 +1,43 @@
-function wakeUp() {
+const student = {
+  studentName: "Manish",
+  studentMarks: 77,
+  studentAge: 23,
+};
+
+function checkMarks(age) {
   return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      console.log("Wake up at 8:00 am");
-      resolve();
-    }, 1000);
+    if (age >= 18) {
+      setTimeout(() => {
+        resolve("Success!");
+      }, 1000);
+    } else {
+      reject("Unsuccessful!");
+    }
   });
 }
 
-function study() {
+function applyForCollege(name, marks) {
   return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      console.log("Study for 10 hours");
-      resolve();
-    }, 2000);
+    if (marks >= 60) {
+      setTimeout(() => {
+        resolve(`${name} got accepted!`);
+      }, 1000);
+    } else {
+      setTimeout(() => {
+        reject(`${name} got rejected`);
+      }, 1000);
+    }
   });
 }
 
-function sleep() {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      console.log("Its time to sleep!");
-      resolve();
-    }, 3000);
-  });
-}
-
-wakeUp()
-  .then(() => study())
-  .then(() => sleep())
+checkMarks(student.studentAge)
+  .then((value) => {
+    console.log(value);
+    return applyForCollege(student.studentName, student.studentMarks);
+  })
+  .then((value) => {
+    console.log(value);
+  })
   .catch((err) => {
-    console.log(`something went wrong: ${err}`);
+    console.log(err);
   });
